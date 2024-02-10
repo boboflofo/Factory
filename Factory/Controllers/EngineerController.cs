@@ -38,20 +38,25 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Engineer engineer)
     {
-      _db.Engineers.Add(engineer);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if (ModelState.IsValid)
+      {
+        _db.Engineers.Add(engineer);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+      return View(engineer);
+
     }
 
     public ActionResult AddMachine(int id)
     {
       Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
       var machines = _db.Machines.ToList();
-    if (machines.Count == 0) 
-    {
+      if (machines.Count == 0)
+      {
         TempData["ErrorMessage"] = "There are no machines available to add.";
         return RedirectToAction("Index");
-    }
+      }
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
       return View(thisEngineer);
     }
@@ -59,9 +64,9 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult AddMachine(Engineer engineer, int machineId)
     {
-      #nullable enable
+#nullable enable
       EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
-      #nullable disable
+#nullable disable
       if (joinEntity == null && machineId != 0)
       {
         _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
@@ -99,7 +104,7 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
-    
+
     [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
