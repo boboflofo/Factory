@@ -46,7 +46,13 @@ namespace Factory.Controllers
     public ActionResult AddMachine(int id)
     {
       Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Title");
+      var machines = _db.Machines.ToList();
+    if (machines.Count == 0) 
+    {
+        TempData["ErrorMessage"] = "There are no machines available to add.";
+        return RedirectToAction("Index");
+    }
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
       return View(thisEngineer);
     }
 

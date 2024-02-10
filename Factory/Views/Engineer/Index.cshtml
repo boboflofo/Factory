@@ -11,6 +11,17 @@
   <h3>No Engineers have been added yet!</h3>
 } 
 
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
 @foreach (Engineer engineer in Model)
 {
   <li>@Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })</li>
