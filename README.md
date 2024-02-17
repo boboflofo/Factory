@@ -18,7 +18,7 @@ Program that asks users to add Engineers, and within specific Engineers, allow f
 
 ## Setup/Installation Requirements
 
-* Navigate to the repository of the named project through this [link](https://github.com/boboflofo/SunshineBakery.git)
+* Navigate to the repository of the named project through this [link](https://github.com/boboflofo/Factory.git)
 * Ensure that the .NET SDK is installed to the latest version [link](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 * Ensure that MySQL is installed to the latest version [link](https://www.mysql.com/)
 * Ensure that MySQL workbench is installed to the latest version [link](https://www.mysql.com/products/workbench/)
@@ -30,8 +30,15 @@ $ dotnet tool install --global dotnet-ef --version 6.0.0
 
 $ dotnet add package Microsoft.EntityFrameworkCore.Design -v 6.0.0
 ```
+* To update the sql database using migrations, follow the commands below 
+* **note that the first migration should be called Initial** 
+```
+$ dotnet ef migrations add [Add[variable]To[model]]  
+
+$ dotnet ef database update
+```
 * Open a code editor such as VScode and in the terminal **git clone** the project for editing capabilities
-* Install dependencies for local project under the Bakery folder using command **dotnet restore**
+* Install dependencies for local project under the Factory folder using command **dotnet restore**
 * Under the projectname folder, create a **appsettings.json** file and add 
 ```
 {
