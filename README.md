@@ -6,7 +6,7 @@
 
 ## Technologies Used
 
-* C#
+* C# g
 * VScode
 * Entity Framework Core
 * SQL
